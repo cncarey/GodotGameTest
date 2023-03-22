@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsipsxxe70ujc"]
+
+[sub_resource type="TileSet" id="TileSet_0jirc"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_0jirc")
+cell_quadrant_size = 32
+format = 2
