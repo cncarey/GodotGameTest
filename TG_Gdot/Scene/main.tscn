@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsipsxxe70ujc"]
 
-[sub_resource type="TileSet" id="TileSet_0jirc"]
+[ext_resource type="PackedScene" uid="uid://cjm0n5pd7t8b0" path="res://Characters/PlayerCat.tscn" id="1_gwng3"]
 
-[node name="Node2D" type="Node2D"]
+[node name="GameLevel" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_0jirc")
-cell_quadrant_size = 32
-format = 2
+[node name="PlayerCat" parent="." instance=ExtResource("1_gwng3")]
+position = Vector2(54, 58)
+
