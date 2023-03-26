@@ -1,0 +1,4 @@
+res://Scene/main.tscn
+res://Characters/cow.tscn
+res://Characters/cow.gd
+res://Characters/PlayerCat.tscn
