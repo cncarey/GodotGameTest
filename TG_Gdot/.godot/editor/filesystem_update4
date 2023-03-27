@@ -1,4 +1,11 @@
+res://Scene/homeInside.tscn
 res://Scene/main.tscn
-res://Characters/cow.tscn
-res://Characters/cow.gd
 res://Characters/PlayerCat.tscn
+res://Characters/cow.tscn
+res://global.gd
+res://Characters/PlayerCat.gd
+res://Scene/exteriorHouseDoor.gd
+res://Scene/HouseInterior/Area2D.gd
+res://Scene/MainScripts/exteriorHouseDoor.gd
+res://Scene/HouseInteriorScripts/InteriorDoor.gd
+res://Scene/main.gd

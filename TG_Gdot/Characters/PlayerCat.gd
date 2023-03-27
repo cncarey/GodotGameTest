@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @export var moveSpeed : float  = 100
-var movement = Vector2();
 @export var statingDirection : Vector2 = Vector2(0, 0)
 # parameters/Idle/blend_position
 var catIdlePB : StringName = "parameters/Idle/blend_position"
@@ -15,7 +14,7 @@ var idle : StringName = "Idle"
 
 func _ready():
 	animationTree.set(catIdlePB, statingDirection)
-
+	
 func _physics_process(_delta):
 	
 	#Get input direction
@@ -43,3 +42,6 @@ func setState():
 		animationMode.travel(walk)
 	else:
 		animationMode.travel(idle)	
+		
+func _on_Button_pressed():
+	Global.goto_scene(Global.sceneInside)		
