@@ -35,9 +35,6 @@ func selectNewDirection():
 	elif moveDirection.x > 0:
 		sprite.flip_h = false
 	
-		
-		
-
 func pickNewState():
 	match currentState:
 		CowState.Idle:
@@ -45,12 +42,20 @@ func pickNewState():
 			currentState = CowState.Walk
 			timer.start(walkTime)
 			selectNewDirection()
-		CowState.Walk:
+		CowState.Walk:   
 			animationMode.travel(idle)
 			currentState = CowState.Idle
 			timer.start(idleTime)
 			
-
-
 func _on_timer_timeout():
 	pickNewState()
+
+#create animal needs section
+#add functionaity to track bond, hunger and thurst
+#add funcionality to depleat bond, hunger and thurst over time
+#if a cow is hungry and near food it will eat on its own
+#add functionality to follow the player when prompted
+#add path finding functionality
+
+func pathFinding():
+	pass #add functionaity so that a cow will go to 

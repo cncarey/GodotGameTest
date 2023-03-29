@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="_consumable" load_steps=4 format=3 uid="uid://d4apku0j7wa6y"]
+
+[ext_resource type="Texture2D" uid="uid://dn5mrwomt831p" path="res://Assets/Sprout/Objects/Simple Milk and grass item.png" id="1_oc6j1"]
+[ext_resource type="Script" path="res://Objects/Classes/Consumable.gd" id="2_qnr6p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hlgy"]
+atlas = ExtResource("1_oc6j1")
+region = Rect2(48, 0, 16, 15)
+
+[resource]
+script = ExtResource("2_qnr6p")
+StartHealth = 20
+itemName = &""
+itemTexture = SubResource("AtlasTexture_1hlgy")
+quanity = 1
+hoverText = &""
+hasGlow = false

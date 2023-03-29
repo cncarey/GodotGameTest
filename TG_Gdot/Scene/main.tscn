@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvjg0jq43elw0"]
+[gd_scene load_steps=21 format=3 uid="uid://bvjg0jq43elw0"]
 
 [ext_resource type="Script" path="res://Scene/main.gd" id="1_71opc"]
 [ext_resource type="PackedScene" uid="uid://cjm0n5pd7t8b0" path="res://Characters/PlayerCat.tscn" id="1_gwng3"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dpaidnudbav2p" path="res://Assets/Sprout/Tilesets/ground tiles/old tiles/Tilled Dirt.png" id="7_j5422"]
 [ext_resource type="PackedScene" uid="uid://bbyxhbhmjer0v" path="res://Characters/cow.tscn" id="8_gfb3x"]
 [ext_resource type="Script" path="res://Scene/MainScripts/exteriorHouseDoor.gd" id="9_idoru"]
+[ext_resource type="PackedScene" uid="uid://dixibwt7f27rd" path="res://Objects/Chest/Chest.tscn" id="11_rcyf6"]
+[ext_resource type="PackedScene" uid="uid://bsljoawcooocm" path="res://Objects/SproutFurniture/ItemSprite.tscn" id="12_fgeeb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wg4ni"]
 texture = ExtResource("2_y4pko")
@@ -891,13 +893,27 @@ position = Vector2(54, 58)
 [node name="Cow" parent="." instance=ExtResource("8_gfb3x")]
 position = Vector2(165, 2)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HouseDoor" type="Area2D" parent="."]
 script = ExtResource("9_idoru")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseDoor"]
 z_index = 1
 position = Vector2(183, 218)
 shape = SubResource("CircleShape2D_uh66n")
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[node name="Chest" parent="." instance=ExtResource("11_rcyf6")]
+position = Vector2(609, 70)
+
+[node name="ItemSprite" parent="." instance=ExtResource("12_fgeeb")]
+z_index = 6
+y_sort_enabled = true
+offset_left = 125.0
+offset_top = 60.0
+offset_right = 125.0
+offset_bottom = 60.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="HouseDoor" to="HouseDoor" method="_on_body_entered"]
+[connection signal="body_exited" from="HouseDoor" to="HouseDoor" method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

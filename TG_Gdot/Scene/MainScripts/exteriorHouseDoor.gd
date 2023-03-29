@@ -8,7 +8,6 @@ func _on_body_entered(body: PhysicsBody2D):
 	if not player :
 		print (body)
 	else :
-		print(player)
 		Global.setLastLocation(Global.sceneMain, player.position)
 	
 	entered = true

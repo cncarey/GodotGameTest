@@ -1,10 +1,14 @@
+Timer
+RichTextLabel
+TextureRect
+AnimationPlayer
 CollisionShape2D
 Area2D
+Sprite2D
+AnimatableBody2D
+StaticBody2D
 Camera2D
 RemoteTransform2D
 TileMap
-Timer
 AnimationTree
-AnimationPlayer
-Sprite2D
 CharacterBody2D
