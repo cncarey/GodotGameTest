@@ -4,7 +4,9 @@ var current_scene = null
 var sceneMain : StringName = "res://Scene/main.tscn"
 var sceneInside : StringName = "res://Scene/homeInside.tscn"
 
-var lastLocation : Dictionary = {};
+@onready var lastLocation : Dictionary = {};
+@onready var shrubs : Dictionary = {};
+@onready var cows : Dictionary = {};
 
 func _ready():
 	var root = get_tree().get_root()
@@ -21,6 +23,26 @@ func goto_scene(path):
 	# we can be sure that no code from the current scene is running:
 
 	call_deferred("_deferred_goto_scene", path)
+
+func addShrub(newShrub):
+	var maxId = 0
+	if shrubs.is_empty() == false: 
+		maxId = shrubs.keys().max()
+	
+	while shrubs.has(maxId):
+		maxId +=1
+	
+	newShrub.id = maxId
+	shrubs[maxId] = { 
+		"location" : newShrub.position,
+		"HealthRemaining" : newShrub.HealthRemaining
+	}
+
+func updateShrub(existingShrub):
+	shrubs[existingShrub.id] = { 
+		"location" : existingShrub.position,
+		"HealthRemaining" : existingShrub.HealthRemaining
+	}
 
 func setLastLocation(path: StringName, location):
 	lastLocation[path] = location;

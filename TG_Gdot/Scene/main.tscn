@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bbyxhbhmjer0v" path="res://Characters/cow.tscn" id="8_gfb3x"]
 [ext_resource type="Script" path="res://Scene/MainScripts/exteriorHouseDoor.gd" id="9_idoru"]
 [ext_resource type="PackedScene" uid="uid://dixibwt7f27rd" path="res://Objects/Chest/Chest.tscn" id="11_rcyf6"]
-[ext_resource type="PackedScene" uid="uid://bsljoawcooocm" path="res://Objects/SproutFurniture/ItemSprite.tscn" id="12_fgeeb"]
+[ext_resource type="PackedScene" uid="uid://bfckha4m8mn66" path="res://Objects/SproutFurniture/ItemSprite.tscn" id="12_fgeeb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wg4ni"]
 texture = ExtResource("2_y4pko")
@@ -891,7 +891,7 @@ layer_2/tile_data = PackedInt32Array(589831, 262148, 0, 655367, 262148, 1, 72090
 position = Vector2(54, 58)
 
 [node name="Cow" parent="." instance=ExtResource("8_gfb3x")]
-position = Vector2(165, 2)
+position = Vector2(118, 40)
 
 [node name="HouseDoor" type="Area2D" parent="."]
 script = ExtResource("9_idoru")
@@ -912,8 +912,15 @@ offset_top = 60.0
 offset_right = 125.0
 offset_bottom = 60.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="shrubsTimer" type="Timer" parent="."]
+
+[node name="ItemSprite2" parent="." instance=ExtResource("12_fgeeb")]
+offset_left = 257.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = -3.0
 
 [connection signal="body_entered" from="HouseDoor" to="HouseDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="HouseDoor" to="HouseDoor" method="_on_body_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pickUpItem" from="ItemSprite" to="." method="_on_item_sprite_pick_up_item"]
+[connection signal="timeout" from="shrubsTimer" to="." method="_on_timer_timeout"]

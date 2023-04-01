@@ -1,9 +1,10 @@
-Timer
 RichTextLabel
-TextureRect
-AnimationPlayer
+Timer
 CollisionShape2D
 Area2D
+RigidBody2D
+TextureRect
+AnimationPlayer
 Sprite2D
 AnimatableBody2D
 StaticBody2D

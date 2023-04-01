@@ -225,6 +225,13 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_aheab")
 parameters/Idle/blend_position = Vector2(-0.00479233, -0.973545)
 parameters/Walk/blend_position = Vector2(0, 0)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="MoveTimer" type="Timer" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="HungerTimer" type="Timer" parent="."]
+
+[node name="HungerLabel" type="RichTextLabel" parent="."]
+offset_right = 42.0
+offset_bottom = 30.0
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HungerTimer" to="." method="_on_hunger_timer_timeout"]

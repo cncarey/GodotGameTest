@@ -1,6 +1,6 @@
 2a60927148abd1d33b818b535e306557
-::res://::1679971005
-global.gd::GDScript::-1::1679885640::0::1::::<>Node<>::
+::res://::1680308626
+global.gd::GDScript::-1::1680235210::0::1::::<>Node<>::
 icon.svg::CompressedTexture2D::473731731313777018::1679238903::1679845871::1::::<><>::
 ::res://Assets/::1679842678
 ::res://Assets/CuterFatter/::1679870819
@@ -81,23 +81,29 @@ TX Struct.png::CompressedTexture2D::7264802562169219470::1611439248::1679845871:
 TX Tileset Grass.png::CompressedTexture2D::5235306072185503426::1608926022::1679845871::1::::<><>::
 TX Tileset Stone Ground.png::CompressedTexture2D::6269476778271945834::1605409448::1679845871::1::::<><>::
 TX Tileset Wall.png::CompressedTexture2D::8136772151155614914::1611451978::1679845871::1::::<><>::
-::res://Characters/::1680047218
-cow.gd::GDScript::-1::1679961928::0::1::::<>CharacterBody2D<>::
-cow.tscn::PackedScene::2507563648713941915::1679973999::0::1::::<><>::uid://ctq6axwby11yi<>res://Characters/cow.gd
+::res://Characters/::1680235211
+cow.gd::GDScript::-1::1680144633::0::1::::<>CharacterBody2D<>::
+cow.tscn::PackedScene::2507563648713941915::1680235211::0::1::::<><>::uid://ctq6axwby11yi<>res://Characters/cow.gd
 PlayerCat.gd::GDScript::-1::1679886671::0::1::::<>CharacterBody2D<>::
-PlayerCat.tscn::PackedScene::5430856232369560695::1680047218::0::1::::<><>::res://Characters/PlayerCat.gd<>uid://c3at8mgxsr5d7
-::res://Objects/::1680045125
+PlayerCat.tscn::PackedScene::5430856232369560695::1680235211::0::1::::<><>::res://Characters/PlayerCat.gd<>uid://c3at8mgxsr5d7
+::res://Objects/::1680050496
 ::res://Objects/Chest/::1680047425
-Chest.tscn::PackedScene::7768742196589674797::1680047425::0::1::::<><>::uid://canvj0xehv4gw<>res://Objects/Chest/Chest.gd
 Chest.gd::GDScript::-1::1680047425::0::1::::<>AnimatableBody2D<>::
-::res://Objects/SproutFurniture/::1680047218
+Chest.tscn::PackedScene::7768742196589674797::1680047425::0::1::::<><>::uid://canvj0xehv4gw<>res://Objects/Chest/Chest.gd
+::res://Objects/Classes/::1680231730
+Consumable.gd::GDScript::-1::1680231730::0::1::::_consumable<>_item<>::
+item.gd::GDScript::-1::1680137622::0::1::::_item<>Resource<>::
+::res://Objects/SproutFurniture/::1680235211
+Grass.tres::Resource/_consumable::9195668218952448838::1680234215::0::1::::<><>::uid://dn5mrwomt831p<>res://Objects/Classes/Consumable.gd
+ItemSprite.gd::GDScript::-1::1680234384::0::1::::<>TextureRect<>::
+ItemSprite.tscn::PackedScene::2742113373265521441::1680235211::0::1::::<><>::res://Objects/SproutFurniture/ItemSprite.gd<>uid://d4apku0j7wa6y
 SproutFurniture.gd::GDScript::-1::1679975645::0::1::::<>Node2D<>::
 SproutFurniture.json::JSON::-1::1679975186::0::1::::<><>::
 SproutFurniture.tscn::PackedScene::174886401766179149::1680047218::0::1::::<><>::res://Objects/SproutFurniture/SproutFurniture.gd<>uid://dg2nn0f8xfdqy
-::res://Scene/::1680047218
-homeInside.tscn::PackedScene::7936170101954792600::1680047218::0::1::::<><>::uid://dviimckj0mjsc<>uid://cjm0n5pd7t8b0<>res://Scene/HouseInteriorScripts/InteriorDoor.gd<>uid://cqymavn5gvtd
-main.gd::GDScript::-1::1679886833::0::1::::<>Node2D<>::
-main.tscn::PackedScene::3879375245464777649::1680047218::0::1::::<><>::res://Scene/main.gd<>uid://cjm0n5pd7t8b0<>uid://bhjnhr3n3jnq4<>uid://d36dm2mxalaay<>uid://cafagcjm8rpm5<>uid://ck2hbkqhuqkvn<>uid://dviimckj0mjsc<>uid://dpaidnudbav2p<>uid://bbyxhbhmjer0v<>res://Scene/MainScripts/exteriorHouseDoor.gd<>uid://dixibwt7f27rd
+::res://Scene/::1680235211
+homeInside.tscn::PackedScene::7936170101954792600::1680235211::0::1::::<><>::uid://dviimckj0mjsc<>uid://cjm0n5pd7t8b0<>res://Scene/HouseInteriorScripts/InteriorDoor.gd<>uid://cqymavn5gvtd
+main.gd::GDScript::-1::1680235210::0::1::::<>Node2D<>::
+main.tscn::PackedScene::3879375245464777649::1680235211::0::1::::<><>::res://Scene/main.gd<>uid://cjm0n5pd7t8b0<>uid://bhjnhr3n3jnq4<>uid://d36dm2mxalaay<>uid://cafagcjm8rpm5<>uid://ck2hbkqhuqkvn<>uid://dviimckj0mjsc<>uid://dpaidnudbav2p<>uid://bbyxhbhmjer0v<>res://Scene/MainScripts/exteriorHouseDoor.gd<>uid://dixibwt7f27rd<>uid://bfckha4m8mn66
 ::res://Scene/HouseInteriorScripts/::1679886877
 InteriorDoor.gd::GDScript::-1::1679886877::0::1::::<>Area2D<>::
 ::res://Scene/MainScripts/::1679974177

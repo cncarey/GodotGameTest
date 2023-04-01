@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsljoawcooocm"]
+[gd_scene load_steps=3 format=3 uid="uid://bfckha4m8mn66"]
 
 [ext_resource type="Script" path="res://Objects/SproutFurniture/ItemSprite.gd" id="1_5ytev"]
 [ext_resource type="Resource" uid="uid://d4apku0j7wa6y" path="res://Objects/SproutFurniture/Grass.tres" id="2_ltv6a"]
@@ -16,3 +16,16 @@ item = ExtResource("2_ltv6a")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
+
+[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_shape_entered" from="RigidBody2D/Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="RigidBody2D/Area2D" to="." method="_on_area_2d_body_shape_exited"]
