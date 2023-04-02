@@ -1,8 +1,9 @@
-res://Scene/main.tscn
-res://Objects/SproutFurniture/Grass.tres
-res://Scene/main.gd
 res://Objects/SproutFurniture/ItemSprite.tscn
-res://Characters/cow.tscn
+res://Objects/SproutFurniture/Grass.tres
+res://Characters/PlayerCat.gd
+res://Characters/Animals/cow.tscn
 res://Characters/PlayerCat.tscn
 res://Scene/homeInside.tscn
-res://Characters/cow.gd
+res://Characters/Emote/touchIndcator.tscn
+res://Scene/main.tscn
+res://Characters/Animals/cow.gd

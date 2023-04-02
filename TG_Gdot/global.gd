@@ -4,6 +4,9 @@ var current_scene = null
 var sceneMain : StringName = "res://Scene/main.tscn"
 var sceneInside : StringName = "res://Scene/homeInside.tscn"
 
+@export var maxShrubs : float = 25
+@export var maxCows : float = 25
+
 @onready var lastLocation : Dictionary = {};
 @onready var shrubs : Dictionary = {};
 @onready var cows : Dictionary = {};
@@ -43,6 +46,9 @@ func updateShrub(existingShrub):
 		"location" : existingShrub.position,
 		"HealthRemaining" : existingShrub.HealthRemaining
 	}
+
+func removeShrub(existingShrub):
+	shrubs.erase(existingShrub.id)
 
 func setLastLocation(path: StringName, location):
 	lastLocation[path] = location;

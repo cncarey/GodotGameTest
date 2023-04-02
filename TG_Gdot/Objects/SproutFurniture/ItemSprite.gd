@@ -6,7 +6,7 @@ signal pickUpItem(item, body, label, istouching)
 
 @export var HealthRemaining: float 
 
-var id : float 
+var id : int 
 @export var item : _item : set = _setItem
 
 @onready var label = $rtl_quantity
@@ -52,8 +52,6 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 	var player := body as CharacterBody2D
 	
 	if player :
-		print("entered area 2d by player") #TODO which player
-		print (body)
 		label.visible = true;
 		pickUpItem.emit(self, body, label, true)
 	else :

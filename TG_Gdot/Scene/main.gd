@@ -24,16 +24,18 @@ func _ready():
 		remove_child(starterShrub2)
 	else:
 		Global.addShrub(starterShrub1)
-		Global.addShrub(starterShrub2)		
-	shrubsTimer.start(shrubTime);
+		Global.addShrub(starterShrub2)	
+			
+	setShrubTimer()
 
 
 func _on_timer_timeout():
-	var spawnedShrub = newShrub(Vector2(randi_range(-250, 250), randi_range(-250, 250)))
-	spawnedShrub.pickUpItem.connect(_on_item_sprite_pick_up_item)
-	add_child(spawnedShrub)
-	Global.addShrub(spawnedShrub)
-	shrubsTimer.start(shrubTime)
+	if Global.shrubs.size() < Global.maxShrubs:
+		var spawnedShrub = newShrub(Vector2(randi_range(-250, 250), randi_range(-250, 250)))
+		spawnedShrub.pickUpItem.connect(_on_item_sprite_pick_up_item)
+		add_child(spawnedShrub)
+		Global.addShrub(spawnedShrub)
+	setShrubTimer()
 	#spawn more grass in a random spot
 	pass # Replace with function body.
 
@@ -42,6 +44,13 @@ func newShrub(loc: Vector2):
 	spawnedShrub.item = shrubTexture
 	spawnedShrub.position = loc
 	return spawnedShrub
+	
+func setShrubTimer():
+	if Global.shrubs.size() < Global.maxShrubs:
+		shrubsTimer.start(shrubTime)
+	else:
+		shrubsTimer.stop()
+
 
 func _on_item_sprite_pick_up_item(item, body, label, isTouching):
 	print("hit in the main")
@@ -54,11 +63,7 @@ func _on_item_sprite_pick_up_item(item, body, label, isTouching):
 			if isTouching == true && body.RemainingHunger < body.MaxHunger:
 				var maxEating = body.MaxHunger - body.RemainingHunger
 				var grassFed = 0
-				#if there is more shrub then hunger and maxEating < eatSpeed
-				#	grassFed = HealthRemaining -  maxEating
-				#if cow can eats more than healt add maxEating < eatSpeed
-				#   grassFed = maxEating - HealthRemaining
-				#
+				
 				if maxEating < player.eatSpeed:
 					if item.HealthRemaining >= maxEating:
 						grassFed = maxEating
@@ -69,10 +74,25 @@ func _on_item_sprite_pick_up_item(item, body, label, isTouching):
 					
 				item.HealthRemaining -= grassFed
 				player.RemainingHunger += grassFed	
-					
-				Global.updateShrub(item);
 				
-				label.text = str(item.HealthRemaining)
+				# let's not drag on having a bunch of only one food shrubs 
+				# so if there's less then half a food just remove it	
+				print("before")
+				print(str(Global.shrubs.size()))
+				
+				if item.HealthRemaining < 2:
+					Global.removeShrub(item)
+					remove_child(item)
+					if shrubsTimer.is_stopped:
+						setShrubTimer()
+				else:
+					Global.updateShrub(item)
+				
+				print("after")
+				print(str(Global.shrubs.size()))
+				
+				if item:
+					label.text = str(item.HealthRemaining)
 				
 			pass
 		else:

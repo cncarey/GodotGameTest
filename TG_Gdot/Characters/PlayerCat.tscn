@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cjm0n5pd7t8b0"]
+[gd_scene load_steps=30 format=3 uid="uid://cjm0n5pd7t8b0"]
 
 [ext_resource type="Script" path="res://Characters/PlayerCat.gd" id="1_g6cqx"]
 [ext_resource type="Texture2D" uid="uid://c3at8mgxsr5d7" path="res://Assets/Sprout/Characters/Basic Charakter Spritesheet.png" id="1_it0i7"]
@@ -233,6 +233,9 @@ transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_ih4vr"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yndsq"]
+radius = 20.0
+
 [node name="PlayerCat" type="CharacterBody2D"]
 script = ExtResource("1_g6cqx")
 
@@ -257,3 +260,11 @@ active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_ih4vr")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(-0.59447, -0.376906)
+
+[node name="TouchArea" type="Area2D" parent="." groups=["Followers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea"]
+shape = SubResource("CircleShape2D_yndsq")
+
+[connection signal="body_entered" from="TouchArea" to="." method="_on_touch_area_body_entered"]
+[connection signal="body_exited" from="TouchArea" to="." method="_on_touch_area_body_exited"]

@@ -1,17 +1,23 @@
 extends CharacterBody2D
 
-enum CowState {Idle, Walk, Lick}
+enum CowState {Idle, Walk, Lick, Follow, FindFood}
+
+var charName : StringName = "Cow"
 
 var isAnimal : bool = true
 var RemainingHunger: float = 20 : set = _setRemainingtHunger
 var MaxHunger: float = 30
+var isTouching : bool = false
+var isFollowing : bool = false
 
+var curTouching = {};
 
 @export var eatSpeed: float = 5
 @export var moveSpeed: float = 20;
 @export var idleTime: float = 5;
 @export var walkTime: float = 2;
 @export var hungerTime: float = 10;
+
 
 
 #figure out how to make this global so i don't need it everywhere
@@ -21,9 +27,12 @@ var idle : StringName = "Idle"
 @onready var animationTree = $AnimationTree
 @onready var animationMode = animationTree.get("parameters/playback")
 @onready var sprite = $BrownCow
+#@onready var emote = $Emote
 @onready var timer = $MoveTimer
 @onready var hungerTimer = $HungerTimer
 @onready var hungerLabel = $HungerLabel
+@onready var touchArea = $TouchArea
+@onready var touchIndicator = $touchIndicator
 
 var moveDirection : Vector2 = Vector2.ZERO
 var currentState : CowState = CowState.Idle
@@ -32,6 +41,12 @@ func _ready():
 	selectNewDirection()
 	pickNewState()
 	_on_hunger_timer_timeout()
+	# Make sure to not await during _ready.
+	call_deferred("actor_setup")
+
+func actor_setup():
+	# Wait for the first physics frame so the NavigationServer can sync.
+	await get_tree().physics_frame
 
 func _setRemainingtHunger(x : float):
 	RemainingHunger = x
@@ -41,6 +56,10 @@ func _physics_process(delta):
 	if currentState == CowState.Walk:
 		velocity = moveDirection * moveSpeed
 		move_and_slide()
+	if currentState == CowState.Follow:
+		pass # add functionaity to follow the player
+		
+
 	
 func selectNewDirection():
 	moveDirection = Vector2(randi_range(-1, 1), randi_range(-1, 1))
@@ -97,4 +116,26 @@ func _on_hunger_timer_timeout():
 
 	hungerTimer.start(hungerTime)
 	
-	
+
+
+func _on_touch_area_body_entered(body):
+	print("started touching cow")
+	print(body)
+	if(body != self && "charName" in body):
+		isTouching = true
+		curTouching[body.charName]= body
+		touchIndicator.visible = true
+		#show emote
+	pass # Replace with function body.
+
+
+func _on_touch_area_body_exited(body):
+	print("stopped touching cow")
+	print(body)
+	if("charName" in body) && curTouching.has(body.charName):
+		curTouching.erase(body.charName)
+		#If ther is nothig else touching hide emote
+		if curTouching.is_empty():
+			touchIndicator.visible = false
+			isTouching = false
+	pass # Replace with function body.

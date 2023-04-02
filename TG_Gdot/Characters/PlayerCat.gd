@@ -8,8 +8,17 @@ var catWalkPB : StringName = "parameters/Walk/blend_position"
 var walk : StringName = "Walk"
 var idle : StringName = "Idle"
 
+var charName : StringName = "PlayerCat"
+
+var followers = []
+signal setFollower(player)
+
 @onready var animationTree = $AnimationTree
 @onready var animationMode = animationTree.get("parameters/playback")
+
+#add value for following
+#add arrar or dictionary to hold what is following us
+#add functiont to turn it on and off
 
 
 func _ready():
@@ -31,6 +40,8 @@ func _physics_process(_delta):
 	#move and slide function uses velocity body to move character on map
 	move_and_slide()
 	setState()
+	startFollow()
+	stopFollow()
 	
 func updateAnimationParams(movingInput : Vector2):	
 	if(movingInput != Vector2.ZERO):
@@ -45,3 +56,32 @@ func setState():
 		
 func _on_Button_pressed():
 	Global.goto_scene(Global.sceneInside)		
+
+func startFollow():
+	if isTouching && Input.is_action_just_pressed("select"):
+		pass #TODO check if there is something in the touching block
+
+func stopFollow():
+	if Input.is_action_just_pressed("cancel") && followers.size > 0:		
+		followers = []
+
+var isTouching : bool = false
+var curTouching : Dictionary = {}
+func _on_touch_area_body_entered(body):
+	print("started touching player")
+	print(body)
+	if(body != self && "charName" in body ): 
+		isTouching = true
+		curTouching[body.charName]= body
+	pass # Replace with function body.
+
+
+func _on_touch_area_body_exited(body):
+	print("stopped touching player")
+	print(body)
+	if("charName" in body) && curTouching.has(body.charName):
+		curTouching.erase(body.charName)
+		#If ther is nothig else touching hide emote
+		isTouching = false
+	
+	pass # Replace with function body.

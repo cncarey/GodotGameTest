@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvjg0jq43elw0"]
+[gd_scene load_steps=21 format=3 uid="uid://cmh2rywqjsq67"]
 
 [ext_resource type="Script" path="res://Scene/main.gd" id="1_71opc"]
 [ext_resource type="PackedScene" uid="uid://cjm0n5pd7t8b0" path="res://Characters/PlayerCat.tscn" id="1_gwng3"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ck2hbkqhuqkvn" path="res://Assets/Sprout/Tilesets/Water.png" id="5_mn43b"]
 [ext_resource type="Texture2D" uid="uid://dviimckj0mjsc" path="res://Assets/Sprout/Tilesets/Wooden House.png" id="6_7k6fg"]
 [ext_resource type="Texture2D" uid="uid://dpaidnudbav2p" path="res://Assets/Sprout/Tilesets/ground tiles/old tiles/Tilled Dirt.png" id="7_j5422"]
-[ext_resource type="PackedScene" uid="uid://bbyxhbhmjer0v" path="res://Characters/cow.tscn" id="8_gfb3x"]
+[ext_resource type="PackedScene" uid="uid://cueisclsvu12k" path="res://Characters/Animals/cow.tscn" id="8_gfb3x"]
 [ext_resource type="Script" path="res://Scene/MainScripts/exteriorHouseDoor.gd" id="9_idoru"]
 [ext_resource type="PackedScene" uid="uid://dixibwt7f27rd" path="res://Objects/Chest/Chest.tscn" id="11_rcyf6"]
 [ext_resource type="PackedScene" uid="uid://bfckha4m8mn66" path="res://Objects/SproutFurniture/ItemSprite.tscn" id="12_fgeeb"]

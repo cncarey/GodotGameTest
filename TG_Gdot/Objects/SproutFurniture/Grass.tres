@@ -11,7 +11,7 @@ region = Rect2(48, 0, 16, 15)
 
 [resource]
 script = ExtResource("2_qnr6p")
-StartingHealth = 25
+StartingHealth = 8
 itemName = &"Grass"
 itemTexture = SubResource("AtlasTexture_1hlgy")
 quanity = 1

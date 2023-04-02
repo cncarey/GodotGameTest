@@ -1,11 +1,12 @@
-RichTextLabel
-Timer
 CollisionShape2D
 Area2D
+Sprite2D
+AnimationPlayer
+AnimatedSprite2D
+RichTextLabel
+Timer
 RigidBody2D
 TextureRect
-AnimationPlayer
-Sprite2D
 AnimatableBody2D
 StaticBody2D
 Camera2D
