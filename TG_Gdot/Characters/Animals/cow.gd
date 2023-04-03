@@ -57,6 +57,7 @@ func _physics_process(delta):
 		velocity = moveDirection * moveSpeed
 		move_and_slide()
 	if currentState == CowState.Follow:
+		follow()
 		pass # add functionaity to follow the player
 		
 
@@ -80,6 +81,13 @@ func pickNewState():
 			animationMode.travel(idle)
 			currentState = CowState.Idle
 			timer.start(idleTime)
+		CowState.Follow:
+			timer.stop()
+			if(velocity != Vector2.ZERO):
+				animationMode.travel(walk)
+			else:
+				animationMode.travel(idle)	
+			pass
 	#TODO when we finish path finding add in
 	#	  animations for eating the grass
 	#TODO if we are near water do a the licking animation
@@ -96,7 +104,6 @@ func _on_timer_timeout():
 
 func pathFinding():
 	pass #add functionaity so that a cow will go to 
-
 
 func _on_hunger_timer_timeout():	
 	if RemainingHunger > 0:
@@ -116,11 +123,7 @@ func _on_hunger_timer_timeout():
 
 	hungerTimer.start(hungerTime)
 	
-
-
 func _on_touch_area_body_entered(body):
-	print("started touching cow")
-	print(body)
 	if(body != self && "charName" in body):
 		isTouching = true
 		curTouching[body.charName]= body
@@ -130,8 +133,6 @@ func _on_touch_area_body_entered(body):
 
 
 func _on_touch_area_body_exited(body):
-	print("stopped touching cow")
-	print(body)
 	if("charName" in body) && curTouching.has(body.charName):
 		curTouching.erase(body.charName)
 		#If ther is nothig else touching hide emote
@@ -139,3 +140,31 @@ func _on_touch_area_body_exited(body):
 			touchIndicator.visible = false
 			isTouching = false
 	pass # Replace with function body.
+
+var followSpeed = 300
+var followDistance = 50
+var followStopDistance = 70
+var whatToFollow = null
+
+func startFollow(newWhatToFollow):
+	whatToFollow = newWhatToFollow
+	currentState = CowState.Follow
+	follow()
+
+func stopFollow():
+	whatToFollow = null
+	currentState = CowState.Idle
+	pickNewState()
+
+func follow():
+	if(whatToFollow && self.position.distance_to(whatToFollow.position) > followDistance):
+		var distance = Vector2(whatToFollow.position - self.position )
+		pickNewState()
+		self.velocity = followSpeed * distance.normalized()
+		if  distance.x < 0 :
+			sprite.flip_h = true
+		elif distance.x > 0:
+			sprite.flip_h = false
+			
+		touchIndicator.visible = false
+		move_and_slide()

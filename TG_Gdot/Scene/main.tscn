@@ -920,6 +920,7 @@ offset_top = -3.0
 offset_right = 257.0
 offset_bottom = -3.0
 
+[connection signal="signalFollowers" from="PlayerCat" to="." method="_on_player_cat_signal_followers"]
 [connection signal="body_entered" from="HouseDoor" to="HouseDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="HouseDoor" to="HouseDoor" method="_on_body_exited"]
 [connection signal="pickUpItem" from="ItemSprite" to="." method="_on_item_sprite_pick_up_item"]

@@ -11,7 +11,7 @@ var idle : StringName = "Idle"
 var charName : StringName = "PlayerCat"
 
 var followers = []
-signal setFollower(player)
+signal signalFollowers(player, curTouching, isStarting)
 
 @onready var animationTree = $AnimationTree
 @onready var animationMode = animationTree.get("parameters/playback")
@@ -59,17 +59,25 @@ func _on_Button_pressed():
 
 func startFollow():
 	if isTouching && Input.is_action_just_pressed("select"):
+		print("selected")
+		print(curTouching)
+		for key in curTouching:
+			curFollowing[key] = curTouching[key]
+		
+		signalFollowers.emit(self, curTouching, true)
 		pass #TODO check if there is something in the touching block
 
+#TODO figure out how to allow selecting what to stop following
 func stopFollow():
-	if Input.is_action_just_pressed("cancel") && followers.size > 0:		
-		followers = []
+	if Input.is_action_just_pressed("cancel"):
+		if curFollowing.is_empty() == false:
+			signalFollowers.emit(self, curFollowing, false)		
+			curFollowing = {}
 
 var isTouching : bool = false
 var curTouching : Dictionary = {}
+var curFollowing : Dictionary = {}
 func _on_touch_area_body_entered(body):
-	print("started touching player")
-	print(body)
 	if(body != self && "charName" in body ): 
 		isTouching = true
 		curTouching[body.charName]= body
@@ -77,8 +85,6 @@ func _on_touch_area_body_entered(body):
 
 
 func _on_touch_area_body_exited(body):
-	print("stopped touching player")
-	print(body)
 	if("charName" in body) && curTouching.has(body.charName):
 		curTouching.erase(body.charName)
 		#If ther is nothig else touching hide emote

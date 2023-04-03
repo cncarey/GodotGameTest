@@ -98,3 +98,12 @@ func _on_item_sprite_pick_up_item(item, body, label, isTouching):
 		else:
 			pass #for now it's the player and we should add this to the inventory
 	pass # Replace with function body.
+
+
+func _on_player_cat_signal_followers(player, curTouching, isStarting):
+	for key in curTouching:
+		if isStarting:
+			curTouching[key].startFollow(player)
+		else:	
+			curTouching[key].stopFollow()
+	pass # Replace with function body.
