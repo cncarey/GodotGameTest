@@ -57,7 +57,7 @@ func _physics_process(delta):
 		velocity = moveDirection * moveSpeed
 		move_and_slide()
 	if currentState == CowState.Follow:
-		follow()
+		follow(delta)
 		pass # add functionaity to follow the player
 		
 
@@ -141,30 +141,35 @@ func _on_touch_area_body_exited(body):
 			isTouching = false
 	pass # Replace with function body.
 
-var followSpeed = 300
-var followDistance = 50
+var FarFollowSpeed = 55
+var CloseFollowSpeed = 25
+var followDistance = 25
 var followStopDistance = 70
 var whatToFollow = null
 
 func startFollow(newWhatToFollow):
 	whatToFollow = newWhatToFollow
 	currentState = CowState.Follow
-	follow()
-
+	
 func stopFollow():
 	whatToFollow = null
 	currentState = CowState.Idle
 	pickNewState()
 
-func follow():
+func follow(delta):
 	if(whatToFollow && self.position.distance_to(whatToFollow.position) > followDistance):
+		touchIndicator.visible = false
+		
 		var distance = Vector2(whatToFollow.position - self.position )
 		pickNewState()
-		self.velocity = followSpeed * distance.normalized()
+		
+		var curFollowSpeed = FarFollowSpeed if (self.position.distance_to(whatToFollow.position) > followDistance * 2) else CloseFollowSpeed 
+		var desiredVelocity = curFollowSpeed * distance.normalized()
 		if  distance.x < 0 :
 			sprite.flip_h = true
 		elif distance.x > 0:
 			sprite.flip_h = false
-			
-		touchIndicator.visible = false
+		
+		var steering = (desiredVelocity - velocity) * delta *2.5
+		velocity += steering
 		move_and_slide()
