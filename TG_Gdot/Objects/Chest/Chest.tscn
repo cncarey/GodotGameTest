@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dixibwt7f27rd"]
+[gd_scene load_steps=24 format=3 uid="uid://dixibwt7f27rd"]
 
 [ext_resource type="Texture2D" uid="uid://canvj0xehv4gw" path="res://Assets/Sprout/Objects/Chest.png" id="1_kvjqt"]
 [ext_resource type="Script" path="res://Objects/Chest/Chest.gd" id="1_wjasm"]
@@ -25,21 +25,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 2]
 }
 
-[sub_resource type="Animation" id="Animation_y2xm6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Chest:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="Animation" id="Animation_d0ngv"]
 resource_name = "OpenSide"
 length = 0.5
@@ -54,6 +39,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [5, 6, 7, 8, 7]
+}
+
+[sub_resource type="Animation" id="Animation_y2xm6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chest:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_i620b"]
@@ -97,6 +97,58 @@ _data = {
 "closedSide": SubResource("Animation_4j1pq")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e2had"]
+animation = &"closedDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_57nyl"]
+animation = &"closedDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mu1yy"]
+animation = &"closedDown"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_cex7j"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_e2had")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_57nyl")
+blend_point_1/pos = Vector2(0, -0.9)
+blend_point_2/node = SubResource("AnimationNodeAnimation_mu1yy")
+blend_point_2/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0w40l"]
+animation = &"OpenDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d3ekk"]
+animation = &"OpenDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v4tfm"]
+animation = &"OpenDown"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_kbri8"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_0w40l")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_d3ekk")
+blend_point_1/pos = Vector2(0, -0.9)
+blend_point_2/node = SubResource("AnimationNodeAnimation_v4tfm")
+blend_point_2/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_am4ox"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0k4eb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8webx"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ly2kx"]
+states/ClosedDown/node = SubResource("AnimationNodeBlendSpace2D_cex7j")
+states/ClosedDown/position = Vector2(379.725, 102.115)
+states/End/position = Vector2(831, 91.5)
+states/OpenDown/node = SubResource("AnimationNodeBlendSpace2D_kbri8")
+states/OpenDown/position = Vector2(633.725, 103.172)
+transitions = ["Start", "ClosedDown", SubResource("AnimationNodeStateMachineTransition_am4ox"), "ClosedDown", "OpenDown", SubResource("AnimationNodeStateMachineTransition_0k4eb"), "OpenDown", "End", SubResource("AnimationNodeStateMachineTransition_8webx")]
+graph_offset = Vector2(101.4, -7.08748)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_lct7p"]
+
 [node name="Chest" type="AnimatableBody2D"]
 script = ExtResource("1_wjasm")
 
@@ -120,3 +172,13 @@ shape = SubResource("CircleShape2D_nv2oq")
 libraries = {
 "": SubResource("AnimationLibrary_vkt6x")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ly2kx")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_lct7p")
+parameters/ClosedDown/blend_position = Vector2(0.00131059, 0.958457)
+parameters/OpenDown/blend_position = Vector2(0, 0)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

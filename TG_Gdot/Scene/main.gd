@@ -5,6 +5,8 @@ extends Node2D
 @onready var starterShrub1 = $ItemSprite
 @onready var starterShrub2 = $ItemSprite2
 
+@onready var chest = $Chest
+
 var shrubTime = 8;
 var shrub = preload("res://Objects/SproutFurniture/ItemSprite.tscn")
 var shrubTexture = preload("res://Objects/SproutFurniture/Grass.tres")
