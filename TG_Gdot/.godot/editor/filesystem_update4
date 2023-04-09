@@ -7,3 +7,5 @@ res://Characters/PlayerCat.tscn
 res://Scene/homeInside.tscn
 res://Scene/main.tscn
 res://Objects/SproutFurniture/ItemSprite.tscn
+res://Objects/SproutFurniture/coin.tres
+res://Objects/SproutFurniture/ItemSprite.gd

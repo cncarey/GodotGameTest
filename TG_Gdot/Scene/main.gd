@@ -79,9 +79,6 @@ func _on_item_sprite_pick_up_item(item, body, label, isTouching):
 				
 				# let's not drag on having a bunch of only one food shrubs 
 				# so if there's less then half a food just remove it	
-				print("before")
-				print(str(Global.shrubs.size()))
-				
 				if item.HealthRemaining < 2:
 					Global.removeShrub(item)
 					remove_child(item)
@@ -90,14 +87,12 @@ func _on_item_sprite_pick_up_item(item, body, label, isTouching):
 				else:
 					Global.updateShrub(item)
 				
-				print("after")
-				print(str(Global.shrubs.size()))
-				
 				if item:
 					label.text = str(item.HealthRemaining)
 				
 			pass
 		else:
+			#if this is the coin remove it and add to the player's money count
 			pass #for now it's the player and we should add this to the inventory
 	pass # Replace with function body.
 
@@ -108,4 +103,10 @@ func _on_player_cat_signal_followers(player, curTouching, isStarting):
 			curTouching[key].startFollow(player)
 		else:	
 			curTouching[key].stopFollow()
+	pass # Replace with function body.
+
+
+func _on_chest_loot_dropped(loot):
+	add_child(loot)
+	loot.pickUpItem.connect(_on_item_sprite_pick_up_item)
 	pass # Replace with function body.

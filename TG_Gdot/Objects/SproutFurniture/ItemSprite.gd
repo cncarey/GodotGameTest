@@ -27,7 +27,7 @@ func _ready():
 	if(v2.x >= v2.y):
 		c.radius = v2.x * 2
 	else: 
-		c.radius = v2.y * v2
+		c.radius = v2.y * 2
 		
 	areaShare.shape = c
 	

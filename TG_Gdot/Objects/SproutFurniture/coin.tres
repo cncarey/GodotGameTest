@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="_consumable" load_steps=5 format=3 uid="uid://cljgpore3wggh"]
+
+[ext_resource type="Texture2D" uid="uid://b8v8ksi0xdxs5" path="res://Assets/Sprout/buttons/Small Square Buttons.png" id="1_jpe3s"]
+[ext_resource type="Script" path="res://Objects/Classes/Consumable.gd" id="2_itatq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hlgy"]
+atlas = ExtResource("1_jpe3s")
+region = Rect2(1, -2, 14, 18)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lulbi"]
+
+[resource]
+script = ExtResource("2_itatq")
+StartingHealth = 1
+itemName = &"Coin"
+itemTexture = SubResource("AtlasTexture_1hlgy")
+quanity = 1
+hoverText = &"spawn for the cows to eat"
+hasGlow = true
+shape = SubResource("CircleShape2D_lulbi")
+hasCollision = false
+collisionRatio = 0.0
