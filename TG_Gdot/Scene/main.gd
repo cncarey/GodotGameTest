@@ -91,6 +91,11 @@ func _on_item_sprite_pick_up_item(item, body, label, isTouching):
 					label.text = str(item.HealthRemaining)
 				
 			pass
+		elif "charName" in body && body.charName == "PlayerCat" && item.item.itemName == "Coin":
+			#add to coin count
+			Global.coinCount += 1
+			remove_child(item)
+			pass	
 		else:
 			#if this is the coin remove it and add to the player's money count
 			pass #for now it's the player and we should add this to the inventory
@@ -108,5 +113,6 @@ func _on_player_cat_signal_followers(player, curTouching, isStarting):
 
 func _on_chest_loot_dropped(loot):
 	add_child(loot)
+	#delay by a second then emit so the animation plays
 	loot.pickUpItem.connect(_on_item_sprite_pick_up_item)
 	pass # Replace with function body.

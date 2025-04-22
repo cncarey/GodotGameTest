@@ -173,3 +173,7 @@ func follow(delta):
 		var steering = (desiredVelocity - velocity) * delta *2.5
 		velocity += steering
 		move_and_slide()
+
+func eat():
+	#move all the eating code i here
+	pass

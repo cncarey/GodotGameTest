@@ -59,8 +59,7 @@ func _on_Button_pressed():
 
 func startFollow():
 	if isTouching && Input.is_action_just_pressed("select"):
-		print("selected")
-		print(curTouching)
+		
 		for key in curTouching:
 			curFollowing[key] = curTouching[key]
 		
